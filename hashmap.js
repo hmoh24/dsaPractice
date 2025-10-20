@@ -81,11 +81,11 @@ class HashMap {
     else {
       const index = HashMap.indexOf(key, this.#bucket);
       //push if its unique
-      if (index < 0) {
-        this.#bucket[hashCode] = [...this.#bucket, newObject];
+      if (index == -1) {
+        this.#bucket[hashCode] = [...existingValues, newObject];
       }
       //replace if the same
-      if (index < this.#capacity - 1) {
+      if (index) {
         this.#bucket[hashCode][index] = newObject;
       }
     }
@@ -149,7 +149,8 @@ class HashMap {
   }
 
   clear() {
-    this.#bucket = new Array(16);
+    this.#capacity = 16
+    this.#bucket = new Array(this.#capacity);
   }
 
   keys() {
@@ -208,3 +209,4 @@ class HashMap {
     console.log('capacity ', this.#capacity)
   }
 }
+
